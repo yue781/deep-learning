@@ -1,4 +1,13 @@
+# same size with input matrix (for adding with input matrix)
+self.encoding = torch.zeros(max_len, d_model)
+self.encoding.requires_grad = False  # we don't need to compute gradient
+
+pos = torch.arange(0, max_len)
+pos = pos.float().unsqueeze(dim=1)
+# 1D => 2D unsqueeze to represent word's position
+
 self.encoding[:, 0::2] = torch.sin(pos / (10000 ** (_2i / d_model)))
+self.encoding[:, 1::2] = torch.cos(pos / (10000 ** (_2i / d_model)))
 
 # self.encoding 是一个二维张量，形状为 (max_len, d_model)，用来存储位置编码。
 # [:, 0::2] 是对 self.encoding 张量的切片操作：
